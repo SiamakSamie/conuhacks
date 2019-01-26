@@ -1,3 +1,4 @@
+import 'package:conuhacks/bikes/yourBikePage.dart';
 import 'package:flutter/material.dart';
 
 class BikePage extends StatelessWidget {
@@ -14,11 +15,23 @@ class BikePage extends StatelessWidget {
           Text("Select a Bike"),
           FlatButton(
             child: Text('Bike #'),
-            onPressed: () {},
+            onPressed: () {
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new YourBikePage()),
+                  );
+              },
           ),
           FlatButton(
             child: Text('Bike #'),
-            onPressed: () {},
+            onPressed: () {
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new YourBikePage()),
+                  );
+              },
           ),
         ],
       )),
