@@ -6,11 +6,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      title: 'Bix-cité',
+      theme: ThemeData(primarySwatch: Colors.purple),
+      home: MyHomePage(title: 'Main Page'),
     );
   }
 }
@@ -25,14 +23,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,20 +33,25 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+            new FlatButton(
+                child: Text('View the Map'),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => Text('Not implemented yet')),
+                  );
+                }),
+            new FlatButton(
+              child: Text('Take out Bike'),
+              onPressed: () {},
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
+            new FlatButton(
+              child: Text('View current Bill'),
+              onPressed: () {},
             ),
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
       ),
     );
   }
