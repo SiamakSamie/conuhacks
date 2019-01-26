@@ -1,3 +1,4 @@
+import 'package:conuhacks/bikePage.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -44,7 +45,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 }),
             new FlatButton(
               child: Text('Take out Bike'),
-              onPressed: () {},
+              onPressed: () {
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new BikePage()),
+                  );
+              }
             ),
             new FlatButton(
               child: Text('View current Bill'),
