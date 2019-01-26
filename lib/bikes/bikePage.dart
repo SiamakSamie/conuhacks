@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class BikePage extends StatefulWidget {
+class BikePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +24,4 @@ class BikePage extends StatefulWidget {
       )),
     );
   }
-
-  final _numberOfBikes = List(4);
 }
