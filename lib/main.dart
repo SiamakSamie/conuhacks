@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import './map/map.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -38,8 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    new MaterialPageRoute(
-                        builder: (context) => Text('Not implemented yet')),
+                    new MaterialPageRoute(builder: (context) => Map()),
                   );
                 }),
             new FlatButton(
