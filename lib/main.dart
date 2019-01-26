@@ -1,4 +1,5 @@
 import 'package:conuhacks/bikePage.dart';
+import 'package:conuhacks/billingPage.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
@@ -55,7 +56,13 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             new FlatButton(
               child: Text('View current Bill'),
-              onPressed: () {},
+              onPressed: () {
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new BillingPage()),
+                  );
+              },
             ),
           ],
         ),
