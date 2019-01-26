@@ -16,6 +16,10 @@
         android:name="io.flutter.app.FlutterApplication"
         android:label="conuhacks"
         android:icon="@mipmap/ic_launcher">
+
+        <meta-data android:name="com.google.android.geo.API_KEY"
+                android:value="AIzaSyC5iCTW2akHg9orhRgGXNV7R2daLhNjFLA"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
@@ -30,6 +34,8 @@
             <meta-data
                 android:name="io.flutter.app.android.SplashScreenUntilFirstFrame"
                 android:value="true" />
+                
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
@@ -37,3 +43,5 @@
         </activity>
     </application>
 </manifest>
+
+
