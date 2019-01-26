@@ -37,7 +37,8 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            new FlatButton(
+            new RaisedButton(
+                materialTapTargetSize: MaterialTapTargetSize.padded,
                 child: Text('View the Map'),
                 onPressed: () {
                   Navigator.push(
@@ -45,7 +46,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     new MaterialPageRoute(builder: (context) => Map()),
                   );
                 }),
-            new FlatButton(
+            new RaisedButton(
               child: Text('Take out Bike'),
               onPressed: () {
                   Navigator.push(
@@ -55,7 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   );
               }
             ),
-            new FlatButton(
+            new RaisedButton(
               child: Text('View current Bill'),
               onPressed: () {
                   Navigator.push(

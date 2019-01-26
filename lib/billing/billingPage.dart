@@ -25,7 +25,7 @@ class BillingPage extends StatelessWidget {
               Padding(
               padding: EdgeInsets.all(8.0),
               child: Text('Saved Amount: \$${format(_savings)}')),
-            new FlatButton(child: Text('Previous Months'), onPressed: () {}),
+            new RaisedButton(child: Text('Previous Months'), onPressed: () {}),
           ])
         ]),
       ),

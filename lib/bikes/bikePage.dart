@@ -13,7 +13,7 @@ class BikePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text("Select a Bike"),
-          FlatButton(
+          RaisedButton(
             child: Text('Bike #'),
             onPressed: () {
                   Navigator.push(
@@ -23,7 +23,7 @@ class BikePage extends StatelessWidget {
                   );
               },
           ),
-          FlatButton(
+          RaisedButton(
             child: Text('Bike #'),
             onPressed: () {
                   Navigator.push(
