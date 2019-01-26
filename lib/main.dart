@@ -1,5 +1,5 @@
-import 'package:conuhacks/bikePage.dart';
-import 'package:conuhacks/billingPage.dart';
+import 'package:conuhacks/bikes/bikePage.dart';
+import 'package:conuhacks/billing/billingPage.dart';
 import 'package:flutter/material.dart';
 
 import './map/map.dart';

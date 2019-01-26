@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class BikePage extends StatelessWidget {
+class BikePage extends StatefulWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,18 +9,9 @@ class BikePage extends StatelessWidget {
       ),
       body: Center(
           child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text("Select a Bike"),
-          FlatButton(child: Text('Bike #'), onPressed: () {}),
-          FlatButton(
-            child: Text('Bike #'),
-            onPressed: () {},
-          ),
-          FlatButton(
-            child: Text('Bike #'),
-            onPressed: () {},
-          ),
           FlatButton(
             child: Text('Bike #'),
             onPressed: () {},
@@ -33,4 +24,6 @@ class BikePage extends StatelessWidget {
       )),
     );
   }
+
+  final _numberOfBikes = List(4);
 }

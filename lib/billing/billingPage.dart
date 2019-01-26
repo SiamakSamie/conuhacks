@@ -11,7 +11,7 @@ class BillingPage extends StatelessWidget {
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Text("This months Billing information:"),
+          Text("Lastest Billing information:"),
           new FlatButton(
             child: Text('Last Month'), 
             onPressed: () {}
