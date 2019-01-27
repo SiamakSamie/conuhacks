@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:location/location.dart';
 
 class Map extends StatefulWidget {
   @override
@@ -10,8 +9,6 @@ class Map extends StatefulWidget {
 
 class MapState extends State<Map> {
   GoogleMapController mapController;
-
-  static Location position = new Location();
 
   final LatLng _conu = const LatLng(45.495293, -73.579064);
 
