@@ -1,3 +1,4 @@
+import 'package:conuhacks/bikes/fakeBike.dart';
 import 'package:conuhacks/bikes/bikePage.dart';
 import 'package:conuhacks/billing/billingPage.dart';
 import 'package:flutter/material.dart';
@@ -64,6 +65,19 @@ class _MyHomePageState extends State<MyHomePage> {
                         context,
                         new MaterialPageRoute(
                             builder: (context) => new BikePage()),
+                      );
+                    })),
+            ButtonTheme(
+                minWidth: 200.0,
+                height: 35.0,
+                child: new RaisedButton(
+                    child: Text('Fake Add Bike',
+                        style: TextStyle(color: Colors.white)),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => new FakeBike()),
                       );
                     })),
             ButtonTheme(
