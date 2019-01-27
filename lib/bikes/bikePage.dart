@@ -1,7 +1,18 @@
 import 'package:conuhacks/bikes/yourBikePage.dart';
 import 'package:flutter/material.dart';
+import 'package:location/location.dart';
+import 'dart:async';
 
-class BikePage extends StatelessWidget {
+class BikePage extends StatefulWidget {
+  @override
+  State createState() => BikeState();
+}
+
+class BikeState extends State<BikePage> {
+  bool isInLocation;
+  var location = new Location();
+  Map<String, double> userLocation;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -11,7 +22,14 @@ class BikePage extends StatelessWidget {
       body: Center(
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
+        children: _buildChild()
+      )),
+    );
+  }
+
+  List<Widget> _buildChild() {
+  if (isInLocation) {
+    return [
           Text("Select a Bike"),
           ButtonTheme(
                 minWidth: 200.0,
@@ -39,8 +57,29 @@ class BikePage extends StatelessWidget {
                   );
               },
           ),)
-        ],
-      )),
-    );
+        ];
+      }
+      else{
+      return [ Text("You aren't in the proximity of any Bikes.")];
+      }
+    }
+
+    Future<Map<String, double>> _getLocation() async {
+    var currentLocation = <String, double>{};
+    try {
+      currentLocation = await location.getLocation();
+    } catch (e) {
+      currentLocation = null;
+    }
+    return currentLocation;
+  }
+
+ @override
+ initState(){  
+   super.initState();
+
+    setState(() {   
+      isInLocation = _getLocation() == null;
+    });
   }
 }
