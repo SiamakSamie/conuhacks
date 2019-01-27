@@ -2,7 +2,6 @@ import 'package:conuhacks/bikes/bikePage.dart';
 import 'package:conuhacks/billing/billingPage.dart';
 import 'package:conuhacks/information/infoPage.dart';
 import 'package:flutter/material.dart';
-
 import './map/map.dart';
 
 void main() => runApp(MyApp());
