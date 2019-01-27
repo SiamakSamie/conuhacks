@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:conuhacks/db/Database.dart';
+import 'package:conuhacks/models/Station.dart';
 
 class Map extends StatefulWidget {
   @override
@@ -34,12 +35,19 @@ class MapState extends State<Map> {
       mapController = controller;
     });
 
-    mapController.addMarker(
-      MarkerOptions(
-        position: LatLng(37.4219999, -122.0862462),
-        infoWindowText:
-            InfoWindowText("Station Angrignon", "Bikes available 3/10"),
-      ),
-    );
+    var db = DBHelper();
+    Future<List<Station>> futureStation = db.getStations();
+
+    futureStation.then((stations) {
+        for (Station station in stations) {
+          mapController.addMarker(
+                MarkerOptions(
+                  position: LatLng(station.lat, station.long),
+                  infoWindowText:
+                      InfoWindowText(station.name, "Bikes available " + station.availableBikes.toString() + "/" + station.totalBikes.toString())
+                ),
+              );
+          }
+    });
   }
 }
