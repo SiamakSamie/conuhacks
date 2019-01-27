@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:conuhacks/db/Database.dart';
 import 'package:conuhacks/models/Bike.dart';
+import 'package:conuhacks/models/Station.dart';
 
 class FakeBike extends StatefulWidget {
 
@@ -30,14 +31,15 @@ void init() {
     var dbHelper = DBHelper();
     // dbHelper.deleteAllBikes();
     
-    Future<List<Bike>> bikes = dbHelper.getBikes();
+    Future<List<Station>> bikes = dbHelper.getStations();
 
     bikes.then((bikes) {
-      for (Bike bike in bikes) {
-        print('speeed:' + bike.speed.toString());
-        print('gear:' + bike.gear.toString());
-        print('distance:' + bike.distance.toString());
-        print('station_id:' + bike.stationId.toString());
+      for (Station bike in bikes) {
+        print('name:' + bike.name.toString());
+        print('lat:' + bike.lat.toString());
+        print('long:' + bike.long.toString());
+        print('avl bikes:' + bike.availableBikes.toString());
+        print('tot bikes:' + bike.totalBikes.toString());
       }
       print ("total bikes:" + bikes.length.toString());
     });
