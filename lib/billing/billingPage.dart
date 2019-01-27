@@ -71,6 +71,6 @@ class BillingPage extends StatelessWidget {
     return totalAmount - savedAmount;
   }
 
-  final double _total = 90.00;
-  final double _savings = 20.00;
+  final double _total = 55.00;
+  final double _savings = 15.50;
 }

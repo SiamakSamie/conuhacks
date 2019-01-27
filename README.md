@@ -1,16 +1,14 @@
 # conuhacks
 
-A new Flutter project.
+##Bike-Cité
+### Take Charge, Give Charge
 
-## Getting Started
+Three software engineering students, passionate about physical activity, sustainability, and IoT.
 
-This project is a starting point for a Flutter application.
+Our vision is to incentivize individuals to decrease their carbon footprint, live a healthy lifestyle, and feel rewarded for doing so.
 
-A few resources to get you started if this is your first Flutter project:
+Our hack, consisted of 3 ideas: 1.Turning normal bicycles from public bicycle sharing system into IoT devices that produce and store electricity from being pedaled. 2. Providing direct network communication to these bicycles, via mobile application. 3. Creating a system that allows users to be rewarded for their participation in these networks.
 
-- [Lab: Write your first Flutter app](https://flutter.io/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.io/docs/cookbook)
-
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.io/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+Built With
+dart
+flutter
