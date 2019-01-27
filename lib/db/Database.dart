@@ -79,6 +79,14 @@ class DBHelper{
     return list;
   }
 
+  Future<Bike> getBike(int id) async {
+    var dbClient = await db;
+    var res = await dbClient.query("Bike", where: 'id = ?', whereArgs: [id]);
+    Bike bike =
+        res.isNotEmpty ? res.map((c) => Bike.fromJson(c)) : [];
+    return bike;
+  }
+
   Future<List<Station>> getStations() async {
     var dbClient = await db;
     var res = await dbClient.query("Station");
