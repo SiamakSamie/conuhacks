@@ -1,5 +1,6 @@
 import 'package:conuhacks/bikes/bikePage.dart';
 import 'package:conuhacks/billing/billingPage.dart';
+import 'package:conuhacks/information/infoPage.dart';
 import 'package:flutter/material.dart';
 
 import './map/map.dart';
@@ -39,7 +40,14 @@ class _MyHomePageState extends State<MyHomePage> {
           children: <Widget>[
             Padding(
                 padding: EdgeInsets.all(20.0),
-                child: Image.asset('images/bikee.png', width: 150.0)),
+                child: Material(child: Ink(child: InkWell(
+                  child:Image.asset('images/bikee.png', width: 150.0),
+                  onTap: () {
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(builder: (context) => InfoPage()),
+                  );
+                })))),
 
             // BUTTON FOR THE MAP
             Material(
