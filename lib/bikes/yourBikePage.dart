@@ -36,6 +36,10 @@ class YourBikePageState extends State<YourBikePage> {
 
     return Scaffold(
       appBar: AppBar(
+        leading: new IconButton(
+          icon: new Icon(Icons.arrow_back),
+          onPressed: (){Navigator.pop(context,true);
+                        Navigator.pop(context,true);}),
         title: Text("Bike #"),
       ),
       body: Center(

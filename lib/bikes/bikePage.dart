@@ -10,9 +10,11 @@ class BikePage extends StatefulWidget {
 
 class BikeState extends State<BikePage> {
   bool isInLocation;
+  bool isLoading = false;
   var location = new Location();
   Map<String, double> userLocation;
   var oneSec = const Duration(seconds: 1);
+  var fiveSec = const Duration(seconds: 5);
 
   @override
   Widget build(BuildContext context) {
@@ -28,7 +30,9 @@ class BikeState extends State<BikePage> {
   }
 
   List<Widget> _buildChild() {
-    if (isInLocation) {
+    if (isLoading && isInLocation) {
+      return [new CircularProgressIndicator()];
+    } else if (isInLocation) {
       return [
         Text("Select a Bike"),
         ButtonTheme(
@@ -37,28 +41,13 @@ class BikeState extends State<BikePage> {
             child: RaisedButton(
               child: Text('Bike #', style: TextStyle(color: Colors.white)),
               onPressed: () {
-                showDialog(
-                    context: context,
-                    barrierDismissible: true,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                          title: new Text("Success"),
-                          content: new Text("Bike # Unlocked"),
-                          actions: <Widget>[
-                            // usually buttons at the bottom of the dialog
-                            new FlatButton(
-                                child: new Text("Continue"),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                  Navigator.push(
-                                    context,
-                                    new MaterialPageRoute(
-                                        builder: (context) =>
-                                            new YourBikePage()),
-                                  );
-                                }),
-                          ]);
-                    });
+                new Timer.periodic(
+                    oneSec,
+                    (Timer t) => setState(() {
+                          isLoading = true;
+                          _buildChild();
+                        }));
+                delay();
               },
             )),
         ButtonTheme(
@@ -80,6 +69,12 @@ class BikeState extends State<BikePage> {
                                 child: new Text("Continue"),
                                 onPressed: () {
                                   Navigator.pop(context);
+                                  new Timer.periodic(
+                                      oneSec,
+                                      (Timer t) => setState(() {
+                                            isLoading = false;
+                                            _buildChild();
+                                          }));
                                   Navigator.push(
                                     context,
                                     new MaterialPageRoute(
@@ -95,6 +90,32 @@ class BikeState extends State<BikePage> {
     } else {
       return [Text("You aren't in the proximity of any Bikes.")];
     }
+  }
+
+  Future delay() async {
+    await new Future.delayed(Duration(milliseconds: 5000), () {
+      showDialog(
+          context: context,
+          barrierDismissible: true,
+          builder: (BuildContext context) {
+            return AlertDialog(
+                title: new Text("Success"),
+                content: new Text("Bike # Unlocked"),
+                actions: <Widget>[
+                  // usually buttons at the bottom of the dialog
+                  new FlatButton(
+                      child: new Text("Continue"),
+                      onPressed: () {
+                        Navigator.pop(context);
+                        Navigator.push(
+                          context,
+                          new MaterialPageRoute(
+                              builder: (context) => new YourBikePage()),
+                        );
+                      }),
+                ]);
+          });
+    });
   }
 
   Future<Map<String, double>> _getLocation() async {
