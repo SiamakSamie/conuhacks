@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:conuhacks/db/Database.dart';
 import 'dart:async';
 import 'package:conuhacks/models/Bike.dart';
+import 'package:sensors/sensors.dart';
 
 class YourBikePage extends StatefulWidget {
 
@@ -10,17 +11,28 @@ class YourBikePage extends StatefulWidget {
 }
 
 class YourBikePageState extends State<YourBikePage> {
-  Bike bike;
   final int bikeId = 1;
+  Bike bike;
+
+  double x;
+  double y;
 
   @override
   void initState() {
     var db = DBHelper();
     super.initState();
-    Future<Bike> bike = db.getBike(bikeId);
+
+    initSensors();
+
+    Future<List<Bike>> bike = db.getBike(bikeId);
     bike.then((b) {
-      this.bike = b;
+      this.bike = b[0]; // since the id is unique, there will only be one entry
+    })
+    .catchError((e) {
+      print (e);
     });
+
+
   }
 
   @override
@@ -28,15 +40,24 @@ class YourBikePageState extends State<YourBikePage> {
     super.didUpdateWidget(oldWidget);
   }
 
+  initSensors() {
+      accelerometerEvents.listen((onData) {
+        this.x = onData.x.toDouble();
+        this.y = onData.y.toDouble();
+      });
+  }
+
   updateBike() {
-    bike.speed++;
-    bike.gear++;
-    bike.distance++;
+    // initSensors();
+    if (this.bike != null) {
+      this.bike.speed++;
+      this.bike.gear++;
+      this.bike.distance++;
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    print('swagmuffin ${bike.gear}');
     const oneSec = const Duration(seconds: 1);
     new Timer.periodic(
         oneSec,
@@ -72,11 +93,13 @@ class YourBikePageState extends State<YourBikePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text('Current Gear:  ${bike.gear}'),
+                    Text('Current Gear:  ${bike != null ? bike.gear : 0}'),
                     // Text('Average Gear: ${bike.avgGear}'),
-                    // Text('Current Speed: ${bike.avgSpeed}'),
+                    Text('Current Speed: ${bike != null ? bike.speed : 0}'),
                     // Text('Average Speed: ${bike.avgSpeed}'),
-                    Text('Distance: ${bike.distance}'),
+                    Text('Distance: ${bike != null ? bike.distance : 0}'),
+                    Text('Current X pos: ${x}'),
+                    Text('Current Y pos: ${y}')
                     // Text('Current Electric Output: ${bike.output}'),
                   ],
                 ),
