@@ -50,7 +50,7 @@ class DBHelper{
     var dbClient = await db;
     await dbClient.transaction((txn) async {
       return await txn.rawInsert(
-          'INSERT INTO Bike(speed, gear, distance) VALUES(' +
+          'INSERT INTO Bike(speed, gear, distance, stationId) VALUES(' +
               '\'' +
               bike.speed.toString() +
               '\'' +
@@ -61,6 +61,10 @@ class DBHelper{
               ',' +
               '\'' +
               bike.distance.toString() +
+              '\'' +
+              ',' +
+              '\'' +
+              bike.stationId.toString() +
               '\'' +
               ')');
     });

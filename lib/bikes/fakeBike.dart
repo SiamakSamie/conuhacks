@@ -14,6 +14,7 @@ class FakeBikeState extends State<FakeBike> {
   int speed;
   int gear;
   int distance;
+  int stationId;
 
   final scaffoldKey = new GlobalKey<ScaffoldState>();
   final formKey = new GlobalKey<FormState>();
@@ -36,6 +37,7 @@ void init() {
         print('speeed:' + bike.speed.toString());
         print('gear:' + bike.gear.toString());
         print('distance:' + bike.distance.toString());
+        print('station_id:' + bike.stationId.toString());
       }
       print ("total bikes:" + bikes.length.toString());
     });
@@ -51,7 +53,10 @@ void _submit() {
         speed: speed,
         gear: gear,
         distance: distance,
+        stationId: stationId
     );
+
+    print( "adding bike with station id: " + bike.stationId.toString());
 
     var dbHelper = DBHelper();
     dbHelper.addBike(bike);
@@ -96,6 +101,13 @@ void _showSnackBar(String text) {
                 validator: (val) =>
                     val.length ==0 ? 'Enter Bike Distance' : null,
                 onSaved: (val) => this.distance = int.parse(val),
+              ),
+              new TextFormField(
+                keyboardType: TextInputType.number,
+                decoration: new InputDecoration(labelText: 'Station Id'),
+                validator: (val) =>
+                    val.length ==0 ? 'Enter Station Id' : null,
+                onSaved: (val) => this.stationId = int.parse(val),
               ),
               new Container(margin: const EdgeInsets.only(top: 10.0),child: new RaisedButton(onPressed: _submit,
                 child: new Text('Add Bike'),),)

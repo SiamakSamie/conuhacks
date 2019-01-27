@@ -16,14 +16,14 @@ class Bike {
     int speed;
     int gear;
     int distance;
-    int station_id;
+    int stationId;
 
     Bike({
         this.id,
         this.speed,
         this.gear,
         this.distance,
-        int station_id
+        this.stationId
     });
 
     factory Bike.fromJson(Map<String, dynamic> json) => new Bike(
@@ -31,7 +31,7 @@ class Bike {
         speed: json["speed"],
         gear: json["gear"],
         distance: json["distance"],
-        station_id: json["station_id"]
+        stationId: json["stationId"]
     );
 
     Map<String, dynamic> toJson() => {
@@ -39,6 +39,6 @@ class Bike {
         "speed": speed,
         "gear": gear,
         "distance": distance,
-        "station_id": station_id
+        "stationId": stationId
     };
 }
