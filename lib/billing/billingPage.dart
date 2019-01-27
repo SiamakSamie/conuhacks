@@ -25,7 +25,10 @@ class BillingPage extends StatelessWidget {
               Padding(
               padding: EdgeInsets.all(8.0),
               child: Text('Saved Amount: \$${format(_savings)}')),
-            new RaisedButton(child: Text('Previous Months'), onPressed: () {}),
+            ButtonTheme(
+                minWidth: 200.0,
+                height: 35.0,
+                child: new RaisedButton(child: Text('Previous Months', style: TextStyle(color: Colors.white)), onPressed: () {}),)
           ])
         ]),
       ),
@@ -40,6 +43,6 @@ class BillingPage extends StatelessWidget {
    return totalAmount-savedAmount;
  }
 
- double _total = 90.00;
- double _savings = 20.00;
+ final double _total = 90.00;
+ final double _savings = 20.00;
 }

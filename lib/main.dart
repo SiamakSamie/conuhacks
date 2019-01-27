@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Bix-cité',
       theme: ThemeData(primarySwatch: Colors.purple),
-      home: MyHomePage(title: 'Main Page'),
+      home: MyHomePage(title: 'Bix-cité'),
     );
   }
 }
@@ -35,37 +35,51 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: Center(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            new RaisedButton(
-                materialTapTargetSize: MaterialTapTargetSize.padded,
-                child: Text('View the Map'),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    new MaterialPageRoute(builder: (context) => Map()),
-                  );
-                }),
-            new RaisedButton(
-              child: Text('Take out Bike'),
-              onPressed: () {
-                  Navigator.push(
-                    context,
-                    new MaterialPageRoute(
-                        builder: (context) => new BikePage()),
-                  );
-              }
-            ),
-            new RaisedButton(
-              child: Text('View current Bill'),
-              onPressed: () {
-                  Navigator.push(
-                    context,
-                    new MaterialPageRoute(
-                        builder: (context) => new BillingPage()),
-                  );
-              },
-            ),
+            Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Image.asset('images/bikee.jpg', width: 150.0)),
+            ButtonTheme(
+                minWidth: 200.0,
+                height: 35.0,
+                child: new RaisedButton(
+                    materialTapTargetSize: MaterialTapTargetSize.padded,
+                    child: Text('View the Map',
+                        style: TextStyle(color: Colors.white)),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        new MaterialPageRoute(builder: (context) => Map()),
+                      );
+                    })),
+            ButtonTheme(
+                minWidth: 200.0,
+                height: 35.0,
+                child: new RaisedButton(
+                    child: Text('Take out Bike',
+                        style: TextStyle(color: Colors.white)),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        new MaterialPageRoute(
+                            builder: (context) => new BikePage()),
+                      );
+                    })),
+            ButtonTheme(
+                minWidth: 200.0,
+                height: 35.0,
+                child: new RaisedButton(
+                  child: Text('View current Bill',
+                      style: TextStyle(color: Colors.white)),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      new MaterialPageRoute(
+                          builder: (context) => new BillingPage()),
+                    );
+                  },
+                )),
           ],
         ),
       ),

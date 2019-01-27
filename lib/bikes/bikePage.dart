@@ -13,8 +13,11 @@ class BikePage extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Text("Select a Bike"),
-          RaisedButton(
-            child: Text('Bike #'),
+          ButtonTheme(
+                minWidth: 200.0,
+                height: 35.0,
+                child: RaisedButton(
+            child: Text('Bike #', style: TextStyle(color: Colors.white)),
             onPressed: () {
                   Navigator.push(
                     context,
@@ -22,9 +25,12 @@ class BikePage extends StatelessWidget {
                         builder: (context) => new YourBikePage()),
                   );
               },
-          ),
-          RaisedButton(
-            child: Text('Bike #'),
+          )),
+          ButtonTheme(
+                minWidth: 200.0,
+                height: 35.0,
+                child:  RaisedButton(
+            child: Text('Bike #', style: TextStyle(color: Colors.white)),
             onPressed: () {
                   Navigator.push(
                     context,
@@ -32,7 +38,7 @@ class BikePage extends StatelessWidget {
                         builder: (context) => new YourBikePage()),
                   );
               },
-          ),
+          ),)
         ],
       )),
     );
