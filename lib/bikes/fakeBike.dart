@@ -31,15 +31,15 @@ void init() {
     var dbHelper = DBHelper();
     // dbHelper.deleteAllBikes();
     
-    Future<List<Station>> bikes = dbHelper.getStations();
+    Future<List<Bike>> bikes = dbHelper.getBikes();
 
     bikes.then((bikes) {
-      for (Station bike in bikes) {
-        print('name:' + bike.name.toString());
-        print('lat:' + bike.lat.toString());
-        print('long:' + bike.long.toString());
-        print('avl bikes:' + bike.availableBikes.toString());
-        print('tot bikes:' + bike.totalBikes.toString());
+      for (Bike bike in bikes) {
+        print('id:' + bike.id.toString());
+        print('speed:' + bike.speed.toString());
+        print('gear:' + bike.gear.toString());
+        print('distance:' + bike.distance.toString());
+        print('stationId:' + bike.stationId.toString());
       }
       print ("total bikes:" + bikes.length.toString());
     });
@@ -50,15 +50,13 @@ void _submit() {
       formKey.currentState.save(); 
      }
 
-    Bike bike = new Bike(
+    Bike bike = new Bike (
         id: 0,
         speed: speed,
         gear: gear,
         distance: distance,
         stationId: stationId
     );
-
-    print( "adding bike with station id: " + bike.stationId.toString());
 
     var dbHelper = DBHelper();
     dbHelper.addBike(bike);
@@ -83,6 +81,15 @@ void _showSnackBar(String text) {
           key: formKey,
           child: new Column(
             children: [
+              new DropdownButton<String>(
+                items: <String>['A', 'B', 'C', 'D'].map((String value) {
+                  return new DropdownMenuItem<String>(
+                    value: value,
+                    child: new Text(value),
+                  );
+                }).toList(),
+                onChanged: (_) {},
+              ),
               new TextFormField(
                 keyboardType: TextInputType.number,
                 decoration: new InputDecoration(labelText: 'Bike Speed'),

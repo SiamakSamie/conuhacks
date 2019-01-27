@@ -37,6 +37,7 @@ class DBHelper{
     await batch.commit();
   
     insertFiveStations();
+    insertSixTeenBikes();
     print("Created tables");
   }
   
@@ -49,6 +50,25 @@ class DBHelper{
     await dbClient.rawQuery('REPLACE INTO Station (name, lat, long, totalBikes, availableBikes) VALUES ("Old Port", 45.507577, -73.553091, 15, 8)');
     await dbClient.rawQuery('REPLACE INTO Station (name, lat, long, totalBikes, availableBikes) VALUES ("Concordia", 45.495246, -73.579042, 20, 6)');
     await dbClient.rawQuery('REPLACE INTO Station (name, lat, long, totalBikes, availableBikes) VALUES ("Cote des neiges", 45.496146, -73.623142, 10, 2)');
+  }
+
+    insertSixTeenBikes() async {
+    var dbClient = await db;
+    await dbClient.rawQuery('REPLACE INTO Bike (speed, gear, distance, stationId) VALUES (10, 5, 100, 1)');
+    await dbClient.rawQuery('REPLACE INTO Bike (speed, gear, distance, stationId) VALUES (15, 6, 200, 1)');
+    await dbClient.rawQuery('REPLACE INTO Bike (speed, gear, distance, stationId) VALUES (20, 4, 300, 1)');
+    await dbClient.rawQuery('REPLACE INTO Bike (speed, gear, distance, stationId) VALUES (15, 5, 400, 1)');
+    await dbClient.rawQuery('REPLACE INTO Bike (speed, gear, distance, stationId) VALUES (20, 3, 500, 1)');
+    await dbClient.rawQuery('REPLACE INTO Bike (speed, gear, distance, stationId) VALUES (25, 2, 600, 1)');
+    await dbClient.rawQuery('REPLACE INTO Bike (speed, gear, distance, stationId) VALUES (30, 3, 700, 1)');
+
+    await dbClient.rawQuery('REPLACE INTO Bike (speed, gear, distance, stationId) VALUES (15, 4, 200, 2)');
+    await dbClient.rawQuery('REPLACE INTO Bike (speed, gear, distance, stationId) VALUES (10, 4, 100, 2)');
+    await dbClient.rawQuery('REPLACE INTO Bike (speed, gear, distance, stationId) VALUES (15, 3, 400, 2)');
+    await dbClient.rawQuery('REPLACE INTO Bike (speed, gear, distance, stationId) VALUES (20, 4, 200, 2)');
+    await dbClient.rawQuery('REPLACE INTO Bike (speed, gear, distance, stationId) VALUES (25, 4, 300, 2)');
+    await dbClient.rawQuery('REPLACE INTO Bike (speed, gear, distance, stationId) VALUES (15, 3, 800, 2)');
+    await dbClient.rawQuery('REPLACE INTO Bike (speed, gear, distance, stationId) VALUES (10, 2, 500, 2)');
   }
 
   Future<List<Bike>> getBikes() async {
