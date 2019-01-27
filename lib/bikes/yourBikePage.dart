@@ -56,11 +56,11 @@ class YourBikePageState extends State<YourBikePage> {
       // this.bike.gear++;
       this.bike.distance++;
       new Timer.periodic(_fiveSec, (Timer t) {
-        myLocation
-        .whenComplete(() {
+        myLocation.whenComplete(() {
           print(myLocation.toString());
         });
-    });}
+      });
+    }
   }
 
   @override
@@ -91,33 +91,193 @@ class YourBikePageState extends State<YourBikePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(28.0),
                   child: Text("Your current statistics")),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                        'Current Gear:  ${this.bike != null ? this.bike.gear : 0}'),
-                    // Text('Average Gear: ${bike.avgGear}'),
-                    Text(
-                        'Current Speed: ${this.bike != null ? this.bike.speed : 0}'),
-                    // Text('Average Speed: ${bike.avgSpeed}'),
-                    Text(
-                        'Distance: ${this.bike != null ? this.bike.distance : 0}'),
-                    Text('Current X pos: ${this.x}'),
-                    Text('Current Y pos: ${this.y}')
-                    // Text('Current Electric Output: ${bike.output}'),
-                  ],
+          //FIRST STATISTIC
+          new Center(
+            child: new Row(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: new BoxDecoration(
+                    color: Colors.green[300],
+                    shape: BoxShape.circle,
+                    border: new Border.all(
+                      color: Colors.green[400],
+                      width: 2,
+                    ),
+                  ),
+                  child: new Center(
+                    child: new Text(
+                      '${this.bike != null ? this.bike.gear : 0}',
+                      style: new TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ],
+                new Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: new Text(
+                      'Current Gear:',
+                      style: new TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    )),
+              ],
+            ),
+          ),
+
+          //SECOND STATISTIC
+          new Center(
+            child: new Row(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: new BoxDecoration(
+                    color: Colors.green[300],
+                    shape: BoxShape.circle,
+                    border: new Border.all(
+                      color: Colors.green[400],
+                      width: 2,
+                    ),
+                  ),
+                  child: new Center(
+                    child: new Text(
+                      '${this.bike != null ? this.bike.speed : 0}',
+                      style: new TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                new Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: new Text(
+                      'Current Speed:',
+                      style: new TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    )),
+              ],
+            ),
+          ),
+
+          //THIRD STATISTIC
+          new Center(
+            child: new Row(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: new BoxDecoration(
+                    color: Colors.green[300],
+                    shape: BoxShape.circle,
+                    border: new Border.all(
+                      color: Colors.green[400],
+                      width: 2,
+                    ),
+                  ),
+                  child: new Center(
+                    child: new Text(
+                      '${this.bike != null ? this.bike.distance : 0}',
+                      style: new TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                new Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: new Text(
+                      'Distance:',
+                      style: new TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    )),
+              ],
+            ),
+          ),
+
+          //FOURTH STATISTIC
+          new Center(
+            child: new Row(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: new BoxDecoration(
+                    color: Colors.green[300],
+                    shape: BoxShape.circle,
+                    border: new Border.all(
+                      color: Colors.green[400],
+                      width: 2,
+                    ),
+                  ),
+                  child: new Center(
+                    child: new Text(
+                      '${this.bike != null ? this.x : 0},${this.bike != null ? this.y : 0}',
+                      style: new TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                new Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: new Text(
+                      'Current Lat/Long:',
+                      style: new TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    )),
+              ],
+            ),
+          ),
+
+          //FIFTH STATISTIC
+          new Center(
+            child: new Row(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: new BoxDecoration(
+                    color: Colors.green[300],
+                    shape: BoxShape.circle,
+                    border: new Border.all(
+                      color: Colors.green[400],
+                      width: 2,
+                    ),
+                  ),
+                  child: new Center(
+                    child: new Text(
+                      '${this.bike != null ? this.bike.distance * bike.gear : 0}',
+                      style: new TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                new Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: new Text(
+                      'Electric Output:',
+                      style: new TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    )),
+              ],
+            ),
           ),
         ],
       )),
