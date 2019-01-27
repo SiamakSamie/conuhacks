@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:conuhacks/db/Database.dart';
 import 'dart:async';
 import 'package:conuhacks/models/Bike.dart';
-import 'package:location/location.dart';
 
 class YourBikePage extends StatefulWidget {
   @override
@@ -12,9 +11,6 @@ class YourBikePage extends StatefulWidget {
 class YourBikePageState extends State<YourBikePage> {
   final int bikeId = 1;
   Bike bike;
-  var location = new Location();
-  Map<String, double> userLocation;
-  final _fiveSec = Duration(seconds: 1);
 
   double x;
   double y;
@@ -39,27 +35,11 @@ class YourBikePageState extends State<YourBikePage> {
     super.didUpdateWidget(oldWidget);
   }
 
-  Future<Map<String, double>> _getLocation() async {
-    var currentLocation = <String, double>{};
-    try {
-      currentLocation = await location.getLocation();
-    } catch (e) {
-      currentLocation = null;
-    }
-    return currentLocation;
-  }
-
   updateBike() {
-    var myLocation = _getLocation();
     if (this.bike != null) {
       // this.bike.speed++;
       // this.bike.gear++;
       this.bike.distance++;
-      new Timer.periodic(_fiveSec, (Timer t) {
-        myLocation.whenComplete(() {
-          print(myLocation.toString());
-        });
-      });
     }
   }
 
