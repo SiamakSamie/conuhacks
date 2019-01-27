@@ -13,30 +13,35 @@ class InfoPage extends StatelessWidget {
           Center(
               child: Padding(
                   padding: EdgeInsets.all(35.0),
-                  child: Text("Bixcité"))),
-          Column(mainAxisAlignment: MainAxisAlignment.start, children: <Widget>[
+                  child: Text("Bixcité", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)))),
+          Column(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
             new Container(
-              padding: EdgeInsets.all(60),
+              padding: EdgeInsets.all(56),
               decoration: new BoxDecoration(
                 color: Colors.green[300],
                 shape: BoxShape.circle,
                 border: new Border.all(
                   color: Colors.green[400],
-                  width: 10,
+                  width: 15,
                 ),
               ),
               child: new Center(
                 child: new Text(
-                  '''We are a group of software engineering students, passionate about physical activity, sustainability, and especially creativity.
-                  Our companies vision is to provide an incentive for individuals to decrease their carbon footprint, live a healthy lifestyle, and feel rewarded for doing so.''',
+              '''Three SOEN students, passionate about physical activity, sustainability, and IoT.
+Our vision is to incentivize individuals to decrease their carbon footprint, live a healthy lifestyle, and feel rewarded for doing so.''',
                   style: new TextStyle(
-                    fontSize: 15.0,
-                    color: Colors.black,
+                    fontSize: 20.0,
+                    color: Colors.white,
                     fontWeight: FontWeight.bold,
                   ),
+                  textAlign: TextAlign.center,
                 ),
               ),
-            )
+            ),
+            Padding(
+                padding: EdgeInsets.all(20.0),
+                child: Image.asset('images/bikee.png', width: 150.0),
+                  ),
           ])
         ]),
       ),
