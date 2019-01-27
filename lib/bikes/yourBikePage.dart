@@ -3,6 +3,7 @@ import 'package:conuhacks/db/Database.dart';
 import 'dart:async';
 import 'package:conuhacks/models/Bike.dart';
 import 'package:location/location.dart';
+import 'package:sensors/sensors.dart';
 
 class YourBikePage extends StatefulWidget {
   @override
@@ -14,7 +15,6 @@ class YourBikePageState extends State<YourBikePage> {
   Bike bike;
   var location = new Location();
   Map<String, double> userLocation;
-  final _fiveSec = Duration(seconds: 1);
 
   double x;
   double y;
@@ -24,11 +24,15 @@ class YourBikePageState extends State<YourBikePage> {
     var db = DBHelper();
     super.initState();
 
+    accelerometerEvents.listen((AccelerometerEvent event) {
+       this.x = event.x.roundToDouble();
+       this.y = event.y.roundToDouble();
+       updateBike();
+    });
+
     Future<List<Bike>> bike = db.getBike(bikeId);
     bike.then((b) {
       this.bike = b[0]; // since the id is unique, there will only be one entry
-    }).whenComplete(() {
-      updateBike();
     }).catchError((e) {
       print(e);
     });
@@ -50,29 +54,15 @@ class YourBikePageState extends State<YourBikePage> {
   }
 
   updateBike() {
-    var myLocation = _getLocation();
+    setState(() {
     if (this.bike != null) {
-      // this.bike.speed++;
-      // this.bike.gear++;
-      this.bike.distance++;
-      new Timer.periodic(_fiveSec, (Timer t) {
-        myLocation.whenComplete(() {
-          print(myLocation.toString());
-        });
-      });
-    }
+      this.bike.distance = this.bike.distance + this.x.abs();
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
-    const oneSec = const Duration(seconds: 1);
-
-    new Timer.periodic(
-        oneSec,
-        (Timer t) => setState(() {
-              updateBike();
-            }));
-
     return Scaffold(
       appBar: AppBar(
         leading: new IconButton(
@@ -185,7 +175,7 @@ class YourBikePageState extends State<YourBikePage> {
                   ),
                   child: new Center(
                     child: new Text(
-                      '${this.bike != null ? this.bike.distance : 0}',
+                      '${this.bike != null ? this.bike.distance.toInt() : 0}',
                       style: new TextStyle(
                         fontSize: 20,
                         color: Colors.white,
@@ -222,7 +212,7 @@ class YourBikePageState extends State<YourBikePage> {
                   ),
                   child: new Center(
                     child: new Text(
-                      '${this.bike != null ? this.x : 0},${this.bike != null ? this.y : 0}',
+                      '${this.x != null && this.y != null ? this.x + this.y : 0}',
                       style: new TextStyle(
                         fontSize: 20,
                         color: Colors.white,
@@ -259,7 +249,7 @@ class YourBikePageState extends State<YourBikePage> {
                   ),
                   child: new Center(
                     child: new Text(
-                      '${this.bike != null ? this.bike.distance * bike.gear : 0}',
+                      '${this.bike != null ? this.bike.distance.toInt() * bike.gear : 0}',
                       style: new TextStyle(
                         fontSize: 20,
                         color: Colors.white,

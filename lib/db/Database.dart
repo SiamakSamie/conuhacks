@@ -31,7 +31,7 @@ class DBHelper{
     // When creating the db, create the table
 
     Batch batch = db.batch();
-    batch.execute("CREATE TABLE Bike(id INTEGER PRIMARY KEY, speed INTEGER, gear INTEGER, distance INTEGER, stationId INTEGER)");
+    batch.execute("CREATE TABLE Bike(id INTEGER PRIMARY KEY, speed INTEGER, gear INTEGER, distance REAL, stationId INTEGER)");
     batch.execute("CREATE TABLE Station(id INTEGER PRIMARY KEY, name VARCHAR, lat REAL, long REAL, totalBikes INTEGER, availableBikes INTEGER)");
 
     await batch.commit();

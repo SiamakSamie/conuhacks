@@ -2,7 +2,7 @@ class Bike {
     int id;
     int speed;
     int gear;
-    int distance;
+    double distance;
     int stationId;
 
     Bike({

@@ -14,7 +14,7 @@ class FakeBike extends StatefulWidget {
 class FakeBikeState extends State<FakeBike> {
   int speed;
   int gear;
-  int distance;
+  double distance;
   int stationId;
 
   final scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -109,7 +109,7 @@ void _showSnackBar(String text) {
                 decoration: new InputDecoration(labelText: 'Distance'),
                 validator: (val) =>
                     val.length ==0 ? 'Enter Bike Distance' : null,
-                onSaved: (val) => this.distance = int.parse(val),
+                onSaved: (val) => this.distance = double.parse(val),
               ),
               new TextFormField(
                 keyboardType: TextInputType.number,
