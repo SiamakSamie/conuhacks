@@ -34,43 +34,21 @@ class BikeState extends State<BikePage> {
       return [new CircularProgressIndicator()];
     } else if (isInLocation) {
       return [
-        Text("You are within the range of station 13,"),
-        Text("Select a bike:"),
+        Center(
+          child: Padding(
+              padding: EdgeInsets.all(20.0),
+              child: Text(
+                'You are in range of the Concordia Station, Select Your Bike',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 20),
+              )),
+        ),
         ButtonTheme(
             minWidth: 200.0,
             height: 35.0,
             child: RaisedButton(
-              child: Text('Unlock Bike #', style: TextStyle(color: Colors.white)),
-              onPressed: () {
-                new Timer.periodic(
-                    oneSec,
-                    (Timer t) => setState(() {
-                          isLoading = true;
-                          _buildChild();
-                        }));
-                delay();
-              },
-            )),
-            ButtonTheme(
-            minWidth: 200.0,
-            height: 35.0,
-            child: RaisedButton(
-              child: Text('Unlock Bike #', style: TextStyle(color: Colors.white)),
-              onPressed: () {
-                new Timer.periodic(
-                    oneSec,
-                    (Timer t) => setState(() {
-                          isLoading = true;
-                          _buildChild();
-                        }));
-                delay();
-              },
-            )),
-            ButtonTheme(
-            minWidth: 200.0,
-            height: 35.0,
-            child: RaisedButton(
-              child: Text('Unlock Bike #', style: TextStyle(color: Colors.white)),
+              child:
+                  Text('Unlock Bike #1', style: TextStyle(color: Colors.white)),
               onPressed: () {
                 new Timer.periodic(
                     oneSec,
@@ -85,37 +63,78 @@ class BikeState extends State<BikePage> {
             minWidth: 200.0,
             height: 35.0,
             child: RaisedButton(
-              child: Text('Unlock Bike #', style: TextStyle(color: Colors.white)),
+              child:
+                  Text('Unlock Bike #2', style: TextStyle(color: Colors.white)),
               onPressed: () {
-                showDialog(
-                    context: context,
-                    barrierDismissible: true,
-                    builder: (BuildContext context) {
-                      return AlertDialog(
-                          title: new Text("Success"),
-                          content: new Text("Bike # Unlocked"),
-                          actions: <Widget>[
-                            // usually buttons at the bottom of the dialog
-                            new FlatButton(
-                                child: new Text("Continue"),
-                                onPressed: () {
-                                  Navigator.pop(context);
-                                  new Timer.periodic(
-                                      oneSec,
-                                      (Timer t) => setState(() {
-                                            isLoading = false;
-                                            _buildChild();
-                                          }));
-                                  Navigator.push(
-                                    context,
-                                    new MaterialPageRoute(
-                                        builder: (context) =>
-                                            new YourBikePage()),
-                                  );
-                                }),
-                          ]);
-                    });
+                new Timer.periodic(
+                    oneSec,
+                    (Timer t) => setState(() {
+                          isLoading = true;
+                          _buildChild();
+                        }));
+                delay();
               },
+            )),
+        ButtonTheme(
+            minWidth: 200.0,
+            height: 35.0,
+            child: RaisedButton(
+              child:
+                  Text('Unlock Bike #3', style: TextStyle(color: Colors.white)),
+              onPressed: () {
+                new Timer.periodic(
+                    oneSec,
+                    (Timer t) => setState(() {
+                          isLoading = true;
+                          _buildChild();
+                        }));
+                delay();
+              },
+            )),
+        ButtonTheme(
+            buttonColor: Colors.grey,
+            minWidth: 200.0,
+            height: 35.0,
+            child: RaisedButton(
+              child: Text('Bike #4 unnavailable',
+                  style: TextStyle(color: Colors.white)),
+              onPressed: () {},
+            )),
+        ButtonTheme(
+            buttonColor: Colors.grey,
+            minWidth: 200.0,
+            height: 35.0,
+            child: RaisedButton(
+              child: Text('Bike #5 unnavailable',
+                  style: TextStyle(color: Colors.white)),
+              onPressed: () {},
+            )),
+        ButtonTheme(
+            buttonColor: Colors.grey,
+            minWidth: 200.0,
+            height: 35.0,
+            child: RaisedButton(
+              child: Text('Bike #6 unnavailable',
+                  style: TextStyle(color: Colors.white)),
+              onPressed: () {},
+            )),
+        ButtonTheme(
+            buttonColor: Colors.grey,
+            minWidth: 200.0,
+            height: 35.0,
+            child: RaisedButton(
+              child: Text('Bike #7 unnavailable',
+                  style: TextStyle(color: Colors.white)),
+              onPressed: () {},
+            )),
+        ButtonTheme(
+            buttonColor: Colors.grey,
+            minWidth: 200.0,
+            height: 35.0,
+            child: RaisedButton(
+              child: Text('Bike #8 unnavailable',
+                  style: TextStyle(color: Colors.white)),
+              onPressed: () {},
             )),
       ];
     } else {
@@ -124,14 +143,23 @@ class BikeState extends State<BikePage> {
   }
 
   Future delay() async {
-    await new Future.delayed(Duration(milliseconds: 5000), () {
+    await new Future.delayed(Duration(milliseconds: 2000), () {
       showDialog(
           context: context,
           barrierDismissible: true,
           builder: (BuildContext context) {
             return AlertDialog(
-                title: new Text("Success"),
-                content: new Text("Bike # Unlocked"),
+                title: new Text(
+                  "Bike Unlocked!",
+                  textAlign: TextAlign.center,
+                ),
+                content: Wrap(
+                  children: <Widget>[
+                    Align(
+                        alignment: Alignment.center,
+                        child: Icon(Icons.lock_open, size: 68.0)),
+                  ],
+                ),
                 actions: <Widget>[
                   // usually buttons at the bottom of the dialog
                   new FlatButton(
