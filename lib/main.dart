@@ -1,6 +1,7 @@
 import 'package:conuhacks/bikes/bikePage.dart';
 import 'package:conuhacks/billing/billingPage.dart';
 import 'package:conuhacks/information/infoPage.dart';
+import 'package:conuhacks/information/leaderboardPage.dart';
 import 'package:flutter/material.dart';
 import './map/map.dart';
 
@@ -154,17 +155,19 @@ class _MyHomePageState extends State<MyHomePage> {
                     fontSize: 20.0,
                   ),
                 )),
-            // ButtonTheme(
-            //     minWidth: 200.0,
-            //     height: 35.0,
-            //     child: new FloatingActionButton(onPressed: () {
-            //       Navigator.push(
-            //         context,
-            //         new MaterialPageRoute(builder: (context) => new FakeBike()),
-            //       );
-            //     })),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+                  Navigator.push(
+                    context,
+                    new MaterialPageRoute(
+                        builder: (context) => new LeaderboardPage()),
+                  );
+                },
+        tooltip: 'Leaderboard',
+        child: Icon(Icons.grade),
       ),
     );
   }
