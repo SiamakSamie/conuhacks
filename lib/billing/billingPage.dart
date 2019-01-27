@@ -1,3 +1,4 @@
+import 'package:conuhacks/billing/previousBillsPage.dart';
 import 'package:flutter/material.dart';
 
 class BillingPage extends StatelessWidget {
@@ -49,7 +50,12 @@ class BillingPage extends StatelessWidget {
               child: new RaisedButton(
                   child: Text('Previous Months',
                       style: TextStyle(color: Colors.white)),
-                  onPressed: () {}),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      new MaterialPageRoute(builder: (context) => PreviousBillsPage()),
+                    );
+                  }),
             )
           ])
         ]),
