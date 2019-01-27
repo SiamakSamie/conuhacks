@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:conuhacks/db/Database.dart';
 import 'dart:async';
 import 'package:conuhacks/models/Bike.dart';
-<<<<<<< HEAD
 import 'package:location/location.dart';
 import 'package:sensors/sensors.dart';
-=======
->>>>>>> b5d30213030a76281406c901b51efe33b5d6bf2c
 
 class YourBikePage extends StatefulWidget {
   @override
@@ -16,11 +13,8 @@ class YourBikePage extends StatefulWidget {
 class YourBikePageState extends State<YourBikePage> {
   final int bikeId = 1;
   Bike bike;
-<<<<<<< HEAD
   var location = new Location();
   Map<String, double> userLocation;
-=======
->>>>>>> b5d30213030a76281406c901b51efe33b5d6bf2c
 
   double x;
   double y;
