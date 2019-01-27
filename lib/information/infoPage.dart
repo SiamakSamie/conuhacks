@@ -16,7 +16,7 @@ class InfoPage extends StatelessWidget {
                     Center(
                         child: Padding(
                             padding: EdgeInsets.all(35.0),
-                            child: Text("Bixcité",
+                            child: Text("Bike-Cité",
                                 style: TextStyle(
                                     fontSize: 30,
                                     fontWeight: FontWeight.bold)))),

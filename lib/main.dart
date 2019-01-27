@@ -11,9 +11,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Bix-cité',
+      title: 'Bike-Cité',
       theme: ThemeData(primarySwatch: Colors.teal),
-      home: MyHomePage(title: 'Bix-cité'),
+      home: MyHomePage(title: 'Bike-Cité'),
     );
   }
 }
