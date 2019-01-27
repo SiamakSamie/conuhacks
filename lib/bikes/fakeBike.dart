@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:conuhacks/db/Database.dart';
-import 'package:conuhacks/modals/Bike.dart';
+import 'package:conuhacks/models/Bike.dart';
 
 class FakeBike extends StatefulWidget {
 

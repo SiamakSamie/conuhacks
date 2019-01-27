@@ -3,7 +3,7 @@ import 'dart:io' as io;
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:conuhacks/modals/Bike.dart';
+import 'package:conuhacks/models/Bike.dart';
 
 class DBHelper{
 

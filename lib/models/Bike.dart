@@ -1,16 +1,3 @@
-/// ClientModel.dart
-import 'dart:convert';
-
-Bike clientFromJson(String str) {
-    final jsonData = json.decode(str);
-    return Bike.fromJson(jsonData);
-}
-
-String clientToJson(Bike data) {
-    final dyn = data.toJson();
-    return json.encode(dyn);
-}
-
 class Bike {
     int id;
     int speed;
