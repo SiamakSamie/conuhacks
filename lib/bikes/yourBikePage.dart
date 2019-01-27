@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:conuhacks/db/Database.dart';
 import 'dart:async';
 import 'package:conuhacks/models/Bike.dart';
-import 'package:sensors/sensors.dart';
+import 'package:location/location.dart';
 
 class YourBikePage extends StatefulWidget {
-
   @override
   State createState() => YourBikePageState();
 }
@@ -13,6 +12,9 @@ class YourBikePage extends StatefulWidget {
 class YourBikePageState extends State<YourBikePage> {
   final int bikeId = 1;
   Bike bike;
+  var location = new Location();
+  Map<String, double> userLocation;
+  final _fiveSec = Duration(seconds: 1);
 
   double x;
   double y;
@@ -22,17 +24,14 @@ class YourBikePageState extends State<YourBikePage> {
     var db = DBHelper();
     super.initState();
 
-    initSensors();
-
     Future<List<Bike>> bike = db.getBike(bikeId);
     bike.then((b) {
       this.bike = b[0]; // since the id is unique, there will only be one entry
-    })
-    .catchError((e) {
-      print (e);
+    }).whenComplete(() {
+      updateBike();
+    }).catchError((e) {
+      print(e);
     });
-
-
   }
 
   @override
@@ -40,37 +39,48 @@ class YourBikePageState extends State<YourBikePage> {
     super.didUpdateWidget(oldWidget);
   }
 
-  initSensors() {
-      accelerometerEvents.listen((onData) {
-        this.x = onData.x.toDouble();
-        this.y = onData.y.toDouble();
-      });
+  Future<Map<String, double>> _getLocation() async {
+    var currentLocation = <String, double>{};
+    try {
+      currentLocation = await location.getLocation();
+    } catch (e) {
+      currentLocation = null;
+    }
+    return currentLocation;
   }
 
   updateBike() {
-    // initSensors();
+    var myLocation = _getLocation();
     if (this.bike != null) {
-      this.bike.speed++;
-      this.bike.gear++;
+      // this.bike.speed++;
+      // this.bike.gear++;
       this.bike.distance++;
+      new Timer.periodic(_fiveSec, (Timer t) {
+        myLocation.whenComplete(() {
+          print(myLocation.toString());
+        });
+      });
     }
   }
 
   @override
   Widget build(BuildContext context) {
     const oneSec = const Duration(seconds: 1);
+
     new Timer.periodic(
         oneSec,
         (Timer t) => setState(() {
-            updateBike();
+              updateBike();
             }));
 
     return Scaffold(
       appBar: AppBar(
         leading: new IconButton(
-          icon: new Icon(Icons.arrow_back),
-          onPressed: (){Navigator.pop(context,true);
-                        Navigator.pop(context,true);}),
+            icon: new Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context, true);
+              Navigator.pop(context, true);
+            }),
         title: Text("Bike #"),
       ),
       body: Center(
@@ -81,33 +91,196 @@ class YourBikePageState extends State<YourBikePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
               Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: EdgeInsets.all(28.0),
                   child: Text("Your current statistics")),
             ],
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: <Widget>[
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text('Current Gear:  ${bike != null ? bike.gear : 0}'),
-                    // Text('Average Gear: ${bike.avgGear}'),
-                    Text('Current Speed: ${bike != null ? bike.speed : 0}'),
-                    // Text('Average Speed: ${bike.avgSpeed}'),
-                    Text('Distance: ${bike != null ? bike.distance : 0}'),
-                    Text('Current X pos: ${x}'),
-                    Text('Current Y pos: ${y}')
-                    // Text('Current Electric Output: ${bike.output}'),
-                  ],
+          //FIRST STATISTIC
+          new Center(
+            child: new Row(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: new BoxDecoration(
+                    color: Colors.green[300],
+                    shape: BoxShape.circle,
+                    border: new Border.all(
+                      color: Colors.green[400],
+                      width: 2,
+                    ),
+                  ),
+                  child: new Center(
+                    child: new Text(
+                      '${this.bike != null ? this.bike.gear : 0}',
+                      style: new TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ],
+                new Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: new Text(
+                      'Current Gear:',
+                      style: new TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    )),
+              ],
+            ),
+          ),
+
+          //SECOND STATISTIC
+          new Center(
+            child: new Row(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: new BoxDecoration(
+                    color: Colors.green[300],
+                    shape: BoxShape.circle,
+                    border: new Border.all(
+                      color: Colors.green[400],
+                      width: 2,
+                    ),
+                  ),
+                  child: new Center(
+                    child: new Text(
+                      '${this.bike != null ? this.bike.speed : 0}',
+                      style: new TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                new Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: new Text(
+                      'Current Speed:',
+                      style: new TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    )),
+              ],
+            ),
+          ),
+
+          //THIRD STATISTIC
+          new Center(
+            child: new Row(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: new BoxDecoration(
+                    color: Colors.green[300],
+                    shape: BoxShape.circle,
+                    border: new Border.all(
+                      color: Colors.green[400],
+                      width: 2,
+                    ),
+                  ),
+                  child: new Center(
+                    child: new Text(
+                      '${this.bike != null ? this.bike.distance : 0}',
+                      style: new TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                new Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: new Text(
+                      'Distance:',
+                      style: new TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    )),
+              ],
+            ),
+          ),
+
+          //FOURTH STATISTIC
+          new Center(
+            child: new Row(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: new BoxDecoration(
+                    color: Colors.green[300],
+                    shape: BoxShape.circle,
+                    border: new Border.all(
+                      color: Colors.green[400],
+                      width: 2,
+                    ),
+                  ),
+                  child: new Center(
+                    child: new Text(
+                      '${this.bike != null ? this.x : 0},${this.bike != null ? this.y : 0}',
+                      style: new TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                new Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: new Text(
+                      'Current Lat/Long:',
+                      style: new TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    )),
+              ],
+            ),
+          ),
+
+          //FIFTH STATISTIC
+          new Center(
+            child: new Row(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.all(12),
+                  decoration: new BoxDecoration(
+                    color: Colors.green[300],
+                    shape: BoxShape.circle,
+                    border: new Border.all(
+                      color: Colors.green[400],
+                      width: 2,
+                    ),
+                  ),
+                  child: new Center(
+                    child: new Text(
+                      '${this.bike != null ? this.bike.distance * bike.gear : 0}',
+                      style: new TextStyle(
+                        fontSize: 20,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                ),
+                new Padding(
+                    padding: const EdgeInsets.all(30.0),
+                    child: new Text(
+                      'Electric Output:',
+                      style: new TextStyle(
+                        fontSize: 20.0,
+                      ),
+                    )),
+              ],
+            ),
           ),
         ],
       )),
     );
   }
- }
+}

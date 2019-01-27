@@ -34,12 +34,43 @@ class BikeState extends State<BikePage> {
       return [new CircularProgressIndicator()];
     } else if (isInLocation) {
       return [
-        Text("Select a Bike"),
+        Text("You are within the range of station 13,"),
+        Text("Select a bike:"),
         ButtonTheme(
             minWidth: 200.0,
             height: 35.0,
             child: RaisedButton(
-              child: Text('Bike #', style: TextStyle(color: Colors.white)),
+              child: Text('Unlock Bike #', style: TextStyle(color: Colors.white)),
+              onPressed: () {
+                new Timer.periodic(
+                    oneSec,
+                    (Timer t) => setState(() {
+                          isLoading = true;
+                          _buildChild();
+                        }));
+                delay();
+              },
+            )),
+            ButtonTheme(
+            minWidth: 200.0,
+            height: 35.0,
+            child: RaisedButton(
+              child: Text('Unlock Bike #', style: TextStyle(color: Colors.white)),
+              onPressed: () {
+                new Timer.periodic(
+                    oneSec,
+                    (Timer t) => setState(() {
+                          isLoading = true;
+                          _buildChild();
+                        }));
+                delay();
+              },
+            )),
+            ButtonTheme(
+            minWidth: 200.0,
+            height: 35.0,
+            child: RaisedButton(
+              child: Text('Unlock Bike #', style: TextStyle(color: Colors.white)),
               onPressed: () {
                 new Timer.periodic(
                     oneSec,
@@ -54,7 +85,7 @@ class BikeState extends State<BikePage> {
             minWidth: 200.0,
             height: 35.0,
             child: RaisedButton(
-              child: Text('Bike #', style: TextStyle(color: Colors.white)),
+              child: Text('Unlock Bike #', style: TextStyle(color: Colors.white)),
               onPressed: () {
                 showDialog(
                     context: context,
